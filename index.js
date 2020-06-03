@@ -11,10 +11,10 @@ const { users } = require('./state')
 /**** PART ONE ****/
 
 // GET /users
-app.get('/users', (req, res) => {
-  //res.send('users output')
-  res.json(users)
-})
+// app.get('/users', (req, res) => {
+//   //res.send('users output')
+//   res.json(users)
+// })
 
 // // GET /users/1
 // app.get('/users/1', (req, res) => {
@@ -37,18 +37,18 @@ app.get('/users', (req, res) => {
 
 // PUT users/1
 
-app.put('/users/1', (req, res) => {
-  users[0].name = "Gordon Cole"
+// app.put('/users/1', (req, res) => {
+//   users[0].name = "Gordon Cole"
 
-  res.json(users[0])
-})
+//   res.json(users[0])
+// })
 
-// DELETE users/1
-app.delete('/users/1', (req, res) => {
-  users.shift()
+// // DELETE users/1
+// app.delete('/users/1', (req, res) => {
+//   users.shift()
 
-  res.json(users)
-})
+//   res.json(users)
+// })
 
 /**** PART TWO ****/
 
@@ -57,21 +57,20 @@ app.use(bodyParser.json());
 
 
 // POST users
-app.post('/users', (req, res) => {
-  let counter = users.length+1
+// app.post('/users', (req, res) => {
+//   let counter = users.length+1
 
-  let newUser = {
-    _id: counter,
-    name: req.body.name,
-    occupation: req.body.occupation,
-    avatar: req.body.avatar
-  }
+//   let newUser = {
+//     _id: counter,
+//     name: req.body.name,
+//     occupation: req.body.occupation,
+//     avatar: req.body.avatar
+//   }
 
-  users.push(newUser)
+//   users.push(newUser)
 
-  res.json(users[users.length-1])
- 
-})
+//   res.json(users[users.length-1])
+// })
 
 // {
 //   "_id": 7,
@@ -88,6 +87,37 @@ app.post('/users', (req, res) => {
 
 /**** PART THREE ****/
 
+// GET /users/:userId
+app.get('/users/:userId', (req, res) => {
+  let userId = req.params.userId
+
+  res.json(users[userId])
+})
+
+// PUT /users/:userId
+app.put('/users/:userId', (req, res) => {
+  let userId = req.params.userId;
+  let selectedUser = users[userId];
+
+  if (req.body.name) {
+    selectedUser.name = req.body.name 
+  }
+  
+  if (req.body.occupation) {
+    selectedUser.occupation = req.body.occupation
+  }
+
+  if (req.body.avatar) {
+    selectedUser.avatar = req.body.avatar
+  }
+
+   res.json(selectedUser)
+})
+
+// DELETE /users/:userId
+app.delete('/users/:userId', (req, res) => {
+  
+})
 
 /* END - create routes here */
 
