@@ -10,22 +10,22 @@ const { users } = require('./state')
 
 /**** PART ONE ****/
 
-// GET /users
-// return the users array
-app.get('/users', (req, res) => {
-  res.json(users) 
-})
+// // GET /users
+// // return the users array
+// app.get('/users', (req, res) => {
+//   res.json(users) 
+// })
 
-// GET /users/1
-// return the first user object
-app.get('/users/1', (req, res) => {
-  res.json(users[0]) 
-})
+// // GET /users/1
+// // return the first user object
+// app.get('/users/1', (req, res) => {
+//   res.json(users[0]) 
+// })
 
-// POST /users
-// create new user object
-// add new user to the users array
-// return the users array
+// // POST /users
+// // create new user object
+// // add new user to the users array
+// // return the users array
 // app.post('/users', (req, res) => {
 //   req = {
 //     "_id": 6,
@@ -38,26 +38,26 @@ app.get('/users/1', (req, res) => {
 //   res.json(users)
 // })
 
-// PUT users/1
-// set a new put path users/1
-// alter the first user record
-// return altered first user record
-app.put('/users/1', (req, res) => {
-  users[0].name = "Gordon Cole"
+// // PUT users/1
+// // set a new put path users/1
+// // alter the first user record
+// // return altered first user record
+// app.put('/users/1', (req, res) => {
+//   users[0].name = "Gordon Cole"
 
-  res.json(users[0])
-})
+//   res.json(users[0])
+// })
 
-// DELETE users/1
-// set a new delete path users/1
-// remove first users from the users array
-// return a confirmation message to the user
-app.delete('/users/1', (req, res) => {
-  users.shift()
+// // DELETE users/1
+// // set a new delete path users/1
+// // remove first users from the users array
+// // return a confirmation message to the user
+// app.delete('/users/1', (req, res) => {
+//   users.shift()
 
-  //res.json(users)
-  res.send("deleted")
-})
+//   //res.json(users)
+//   res.send("deleted")
+// })
 
 /**** PART TWO ****/
 
@@ -95,6 +95,8 @@ app.post('/users', (req, res) => {
 /**** PART THREE ****/
 
 // GET /users/:userId
+// create a userid variable that can be used in the path
+// return the specified user object
 app.get('/users/:userId', (req, res) => {
   let userId = req.params.userId
 
@@ -102,6 +104,10 @@ app.get('/users/:userId', (req, res) => {
 })
 
 // PUT /users/:userId
+// define a userid variable to select a user from the path
+// alter the specified users details if updates are made in the body
+// do not alter key values that have not changed
+// return the updated user object
 app.put('/users/:userId', (req, res) => {
   let userId = req.params.userId
   let selectedUser = users[userId]
@@ -128,6 +134,9 @@ app.put('/users/:userId', (req, res) => {
 // }
 
 // DELETE /users/:userId
+// define a userid variable to select a user from the path
+// add a new keyvalue to denote inactive status for the selected user
+// return a message confirming the specified user has been deleted
 app.delete('/users/:userId', (req, res) => {
   let userId = req.params.userId
   let selectedUser = users[userId]
